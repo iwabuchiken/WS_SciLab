@@ -1,0 +1,15 @@
+fpath = 'C:\WORKS\WS\WS_SciLab\D-1'
+//exec(fpath+'/text_mputl.txt')
+
+load(fpath+'/funcs.sci')
+		[] = resume(%__resumeList__(:))
+		  !--error 274 
+		左辺の命令: 名前を入力してください.
+		in  execstr instruction    called by :  
+		at line     981 of function %_sodload called by :  
+		load(fpath+'\funcs.sci')
+
+exec(fpath+'/funcs.sci')
+
+//REF http://home.hit.no/~finnh/scilab_scicos/scilab/
+ax1=gca();ax1.grid=[0,0]
