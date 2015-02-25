@@ -30,3 +30,65 @@ function []=funcgrid()
 	ax1=gca();ax1.grid=[0,0];
 
 endfunction
+
+function []=plot_3d()
+	
+	t=[0:0.3:2*%pi]';
+	z=sin(t)*cos(t');
+	plot3d(t,t,z)	
+
+endfunction
+
+function []=plot_3d_sphere()
+	
+	x = -1:0.1:1;
+	//y = 1-sqrt(x);
+	y = sqrt(1-x.^2);
+	
+	z = sqrt(1-x.^2-y.^2);
+	
+	plot3d(x,y,z);
+	
+	//z=sin(t)*cos(t');
+	//plot3d(t,t,z)	
+
+endfunction
+
+function []=plot_3d_sphere_v2()
+	
+	a = -0.9:0.1:0.9;
+	b = a;
+	
+	c = sqrt(1-a.^2-b.^2);
+	//z = sqrt(1-x.^2-y.^2);
+	
+	plot3d(a,b,c);
+	//plot3d(x,y,z);
+	
+	//z=sin(t)*cos(t');
+	//plot3d(t,t,z)	
+
+endfunction
+
+function []=plot_3d_Exp_Sin()
+
+	x = -10:0.1:10;
+	y = 0:0.1:10;
+	
+	[xc yc] = meshgrid(x, y);
+	w = %pi/4;
+	b = -0.5;
+	
+	plot(x,sin(x));
+
+	scf(2);
+	
+	x = -5:0.1:5;
+	y = 0:0.1:10;
+	[xc yc] = meshgrid(x, y);
+	w = %pi/4;
+	b = -0.5;
+	z = exp(b*yc).*sin(w*xc);
+	plot3d(x, y, z);
+		
+endfunction
