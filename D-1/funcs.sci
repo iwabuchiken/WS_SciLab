@@ -1,3 +1,11 @@
+//	plotcomplex
+//	funcgrid
+//	plot_3d
+//	plot_3d_sphere
+//	plot_3d_sphere_v2
+//	plot_3d_Exp_Sin
+//	plot_Exp_Sin
+//	mesh_grid
 abc = 'abc'
 
 function []=plotcomplex()
@@ -91,4 +99,46 @@ function []=plot_3d_Exp_Sin()
 	z = exp(b*yc).*sin(w*xc);
 	plot3d(x, y, z);
 		
+endfunction
+
+function [x, y, xc, yc]=plot_Exp_Sin()
+
+	x = -1:0.1:1;
+	y = 0:0.1:1;
+	
+	[xc yc] = meshgrid(x, y);
+
+	return [x, y, xc, yc];		
+	
+endfunction
+
+function [x,y,xc,yc,yc_e,yc_e_t,yc_e_t1, yc_t, yc_t1]=mesh_grid()
+
+	x = -1:0.1:1;
+	y = 0:0.1:1;
+	
+	[xc yc] = meshgrid(x, y);
+
+	// exponentials
+	yc_e = exp(yc);
+	
+	yc_e_t = yc_e';
+	yc_e_t1 = yc_e_t(1:1,1:11);	//=> range of: row 1 to 1, column 1 to 11
+	
+	// transpose
+	yc_t = yc';
+	yc_t1 = yc_t(1:1,1:11);
+	
+	// plot
+	plot(yc_t1, yc_e_t1);
+	
+	// return
+	return [x,y,xc,yc,yc_e,yc_e_t,yc_e_t1, yc_t, yc_t1];		
+	
+endfunction
+
+function []=func()
+
+	//return [x, y, xc, yc];		
+	
 endfunction
