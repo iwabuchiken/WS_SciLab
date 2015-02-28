@@ -45,6 +45,37 @@ plot3d(x, y, sinxc)
 
 
 -----------------------------------------------------
+28/02/2015 15:38:49
+
+fpath = 'C:\WORKS\WS\WS_SciLab\D-1'
+exec(fpath+'\funcs.sci')
+
+palabora
+x = palabora()
+[x y] = palabora();
+plot(x,y);
+
+[range1, y1 range1, y2] = palabora2();
+
+[range1, y1, range1, y2] = palabora3();
+
+mtlb_axis([0, 5, -3.5, 3.5]);
+
+plot(range1, y1, range1, y2);
+
+[range1, y1, range1, y2, rng2] = palabora3();
+
+plot(rng1, y1, rng1, y2);
+
+plot(rng1, y1, rng1, y2, rng2, y3, rng2, y4);
+
+mtlb_axis([0, 5, -3, 3]);
+mtlb_axis([-5, 5, -3, 3]);
+
+[range1, y1, range1, y2, rng2] = palabora4();
+
+plot(rng1, y1, rng1, y2, rng2, y3, rng2, y4);
+
 -----------------------------------------------------
 -----------------------------------------------------
 -----------------------------------------------------

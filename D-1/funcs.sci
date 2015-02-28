@@ -137,8 +137,89 @@ function [x,y,xc,yc,yc_e,yc_e_t,yc_e_t1, yc_t, yc_t1]=mesh_grid()
 	
 endfunction
 
+function [x, y]=palabora()
+
+	//x = -1:0.1:1;
+	x = 10:0.01:11;
+
+	y = sqrt(x - 10);
+	//y = sqrt(x - 10);
+	
+	return [x, y];		
+	//return [x, y, xc, yc];		
+	
+endfunction
+
+function [x1, y1, x2,y2]=palabora2()
+
+	x1_left = 3;
+	x1_right = 4;
+
+	//x = -1:0.1:1;
+	range1 = x1_left:0.01:x1_right;
+	range2 = -11:0.01:-10;
+
+	y1 = sqrt(range1 - x1_left);
+	y2 = -sqrt(range1 - x1_left);
+	
+	return [range1, y1 range1, y2];		
+	
+endfunction
+
+//function [x1, y1, x2,y2]=palabora3()
+function [rng1, y1, rng1, y2, rng2, y3, rng2, y4]=palabora3()
+
+	x1_left = 3;
+	x1_right = 4;
+
+	x2_left = -4;
+	x2_right = -3;
+
+	rng1 = x1_left:0.01:x1_right;
+
+	rng2 = x2_left:0.01:x2_right;
+
+	// 1st, 2nd
+	y1 = sqrt(rng1.^2 - x1_left^2);
+	y2 = -sqrt(rng1.^2 - x1_left^2);
+	
+	// 3rd, 4th
+	y3 = sqrt(rng2.^2 - x2_right^2);
+	y4 = -sqrt(rng2.^2 - x2_right^2);
+	
+	return [rng1, y1, rng1, y2, rng2, y3, rng2, y4];		
+	
+endfunction
+
+function [rng1, y1, rng1, y2, rng2, y3, rng2, y4]=palabora4()
+
+	x1_left = 3;
+	x1_right = 4;
+
+	x2_left = -4;
+	x2_right = -3;
+
+	rng1 = x1_left:0.01:x1_right;
+
+	rng2 = x2_left:0.01:x2_right;
+
+	// 1st, 2nd
+	y1 = (1/2) * sqrt((1/2*rng1).^2 - (1/2*x1_left)^2);
+	y2 = -(1/2)*sqrt((1/2*rng1).^2 - (1/2*x1_left)^2);
+	//y1 = (1/2) * sqrt(rng1.^2 - x1_left^2);
+	//y2 = -(1/2)*sqrt(rng1.^2 - x1_left^2);
+	
+	// 3rd, 4th
+	y3 = sqrt(rng2.^2 - x2_right^2);
+	y4 = -sqrt(rng2.^2 - x2_right^2);
+	
+	return [rng1, y1, rng1, y2, rng2, y3, rng2, y4];		
+	
+endfunction
+
 function []=func()
 
 	//return [x, y, xc, yc];		
 	
 endfunction
+
