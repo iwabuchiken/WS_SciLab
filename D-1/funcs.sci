@@ -217,6 +217,34 @@ function [rng1, y1, rng1, y2, rng2, y3, rng2, y4]=palabora4()
 	
 endfunction
 
+function [x1, x2, rng1]=palabora_crossY()
+
+	t1_top = 4;
+	t1_bottom = 3;
+
+	rng1 = t1_top:-0.01:t1_bottom;
+
+	// 1st, 2nd
+	x1 = sqrt((1/2*rng1).^2 - (1/2*t1_bottom)^2);
+	x2 = -sqrt((1/2*rng1).^2 - (1/2*t1_bottom)^2);
+	
+	return [x1, x2, rng1];		
+	
+endfunction
+
+// @return => (t1-t0)/(t'1-t'0)
+function [b, a]=lorenz_trans_time()
+
+	b = 0:0.1:0.9;
+	
+	//a = 1 / sqrt(1-b.^2);
+	a = 1 ./ sqrt(1-b.^2);
+
+	return [b, a];		
+	//return [b, a'];		
+	
+endfunction
+
 function []=func()
 
 	//return [x, y, xc, yc];		
