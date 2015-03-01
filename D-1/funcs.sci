@@ -245,6 +245,51 @@ function [b, a]=lorenz_trans_time()
 	
 endfunction
 
+function [beta, beta_gamma]=lorenz_beta_gamma()
+
+	beta = 1:0.01:2;
+	beta_gamma = sqrt(beta.^2 - 1);
+
+	return [beta, beta_gamma];		
+	
+endfunction
+
+function []=hyperbolics()
+
+	x = -2:0.01:2;
+	
+	y = sinh(x);
+	
+	y2 = x.^3;
+
+	plot(x,y, x, y2);
+
+	xglid(2);
+
+	//return [x, y, xc, yc];		
+	
+endfunction
+
+function [x, y1, y2, x2, y3, y4, r, im]=sin2sinh()
+
+	//x = -3*%pi:%pi/180:3*%pi;
+	x = -1*%pi:%pi/180:1*%pi;
+	x2 = -3*%pi:%pi/180:3*%pi;
+
+	//y1 = sin(%i*x);
+	y1 = -1*%i*sin(%i*x);
+	y2 = sinh(x);
+
+	y3 = -1*%i*sin(%i*x2);
+	y4 = sinh(x2);
+
+	r = real(y1);
+	im = imag(y1);
+	
+	return [x y1 y2 x2 y3 y4 r im];		
+	
+endfunction
+
 function []=func()
 
 	//return [x, y, xc, yc];		

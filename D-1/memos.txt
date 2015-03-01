@@ -93,7 +93,15 @@ xgrid(2);
 
 [a, b]=lorenz_trans_time();
 
+[beta, beta_gamma]=lorenz_beta_gamma()
 
+plot(beta, beta_gamma);
+
+[x, y1, y2, x2, y3, y4, r, im]=sin2sinh()
+
+plot(x, y2, x2, y4);
+
+mtlb_axis([-3.5, 3.5, -10, 10]);
 
 -----------------------------------------------------
 -----------------------------------------------------
