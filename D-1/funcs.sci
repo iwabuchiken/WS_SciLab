@@ -290,6 +290,27 @@ function [x, y1, y2, x2, y3, y4, r, im]=sin2sinh()
 	
 endfunction
 
+function y=F(x)
+    f1 = sin(x(1)*x(2))+exp(x(2)*x(3)+x(1)) 
+    f2 = sum(x.^3)
+    y=[f1;f2]
+endfunction
+
+function ret = my_evalpoly(p, x, n)
+
+	C = coeff(p);
+	//C = coeff(p, "c");
+	
+	val = C.*x^(0:n);
+	//val = C.x^(0:n);
+	//val = C.x^(0:(n));
+	
+	ret = sum(val);
+
+	//return [x, y, xc, yc];		
+	
+endfunction
+
 function []=func()
 
 	//return [x, y, xc, yc];		

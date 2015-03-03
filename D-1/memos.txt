@@ -104,5 +104,42 @@ plot(x, y2, x2, y4);
 mtlb_axis([-3.5, 3.5, -10, 10]);
 
 -----------------------------------------------------
+03/03/2015 08:51:28
+
+fpath = 'C:\WORKS\WS\WS_SciLab\D-1'
+exec(fpath+'\funcs.sci')
+
+x=[1;2;3];
+[J,H]=derivative(F,x)
+
+t = poly(0,"t");
+p = t^2+t+1;
+q = derivat(p);
+
+t2 = poly(1:4,"t2");
+t2 = poly(4,"t2");
+t2 = poly(4,"t2", "coeff");
+t2 = poly(4,"t2", "r"); t2;
+
+m0 = poly(0,"m0");
+c = poly(0,"c");
+v = poly(0,"v");
+
+exec(fpath+'\lib\evalpoly.sci')
+
+a = 1 + v^2;
+
+evalpoly(a,2);
+
+x = poly(0,"x");
+
+y = 1+x+x^2;
+
+C = coeff(y);
+
+[nr,nc] = size(y);
+
+ret = my_evalpoly(y, x, 2);
+
 -----------------------------------------------------
 -----------------------------------------------------
