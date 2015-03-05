@@ -311,6 +311,120 @@ function ret = my_evalpoly(p, x, n)
 	
 endfunction
 
+function [x, y, y2,y3,y4,sum]=sin_cos()
+
+	x = -2*%pi:%pi/180:2*%pi;
+	
+	y = sin(x);
+	y2 = cos(x);
+	y3 = sin(x+%pi/6);
+	y4 = sin(x*2);
+	
+	sum = y + y2 + y3+y4;
+	
+	return [x, y, y2, y3,y4,sum];		
+	
+endfunction
+
+function [x,y1,y2,sum]=sin_cos_2()
+
+	x = -2*%pi:%pi/180:2*%pi;
+	
+	y1 = sin(x);
+	y2 = sin(x+%pi/1);
+//	y3 = sin(x+%pi/6);
+//	y4 = sin(x*2);
+	
+	sum = y1 + y2;
+	
+	return [x,y1,y2,sum];		
+	
+endfunction
+
+function []=anim()
+
+	clear; xdel(winsid());
+
+	// Create data
+	t = 0:0.005:1;    // Time data
+	x = sin(2*%pi*t); // Position data
+	
+	// Draw initial figure
+	figure(1);
+	plot(x(1),0,'o');
+	h_compound = gce();
+	h_compound.children.mark_size = 20;
+	h_compound.children.mark_background = 2;
+	h_axes = gca();
+	h_axes.data_bounds = [-1.5,-1.5;1.5,1.5];
+	
+	// Animation Loop
+	i = 1;
+	while i<=length(x)
+	    drawlater();
+	    h_compound.children.data = [x(i),0];
+	    drawnow();
+	    i = i+1;
+	end		
+	
+endfunction
+
+//REF http://help.scilab.org/docs/5.3.1/en_US/drawlater.html
+function []=draw_later()
+
+	//Example :  one axes / one figure
+	drawlater(); 
+	xfarc(.25,.55,.1,.15,0,64*360);
+	xfarc(.55,.55,.1,.15,0,64*360);
+	xfrect(.3,.8,.3,.2); 
+	xfrect(.2,.7,.5,.2);  
+	xfrect(.32,.78,.1,.1);
+	xfrect(.44,.78,.14,.1);
+	xfrect(-.2,.4,1.5,.8);
+	xstring(0.33,.9,"A Scilab Car");    
+	a=get("current_axes");
+	a.children(1).font_size=4;
+	a.children(1).font_style=4;  
+	a.children(1).background=5;
+	a.children(3).background=8;
+	a.children(4).background=8; 
+	a.children(5).background=17;
+	a.children(6).background=17; 
+	a.children(7).background=25;
+	a.children(8).background=25;
+	xclick();drawnow();
+	 
+	//Example 2:: two axes / one figure
+	
+	subplot(212)
+	a=gca();
+	drawlater // what will be present in this axes will be displayed later
+	plot2d // draw these axes and children later...
+	
+	subplot(211) // Warning: we change the axes
+	plot2d1 // default drawing mode
+	
+	drawnow() // all is visible	
+
+endfunction
+
+function []=test_gce()
+
+	a=gca() //get the handle of the newly created axes
+	a.data_bounds=[1,0;10,10];
+	//a.data_bounds=[1,1;10,10];
+	a.axes_visible = 'on' ;
+	
+	for i=1:5
+	  xfrect(7-i,9-i,3,3);
+	  e=gce();
+	  e.background=i;
+	end
+	
+	//return [x, y, xc, yc];		
+	
+endfunction
+
 function []=func()
 
 	//return [x, y, xc, yc];		
