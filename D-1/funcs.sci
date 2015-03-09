@@ -264,7 +264,7 @@ function []=hyperbolics()
 
 	plot(x,y, x, y2);
 
-	xglid(2);
+	xgrid(2);
 
 	//return [x, y, xc, yc];		
 	
@@ -421,6 +421,152 @@ function []=test_gce()
 	  e.background=i;
 	end
 	
+	//return [x, y, xc, yc];		
+	
+endfunction
+
+function [t,y]=catenary()
+
+	// x values
+	t=[-1*%pi:%pi/360:1*%pi];
+	//t=[-2*%pi:%pi/360:2*%pi];
+	//t=[0:0.3:2*%pi];
+
+	// cosh
+	y = cosh(t);
+
+	// cosh 2
+	a = 3;
+	y2 = a*cosh(t/a);
+
+	// parabola
+	y3 = a + t.^2/2*a;
+
+	// plot
+	plot2d(t',[y',y2',y3'], rect=[-3,0,3,6]);
+	//plot(t',[y',y2',y3'], rect=[-3,0,3,6]);
+	//plot(t',[y',y2',y3']);	//=> working
+	//plot(t,y,t,y2,t,y3);
+	
+	xgrid(1);
+	
+			//REF http://help.scilab.org/docs/5.3.3/en_US/legend.html
+	legend(['cosh(t)';'a*cosh(t/a)';'a + t.^2/2*a']);
+
+	return [t,y];
+	
+endfunction
+
+function [x, y]=arcosh()
+
+	x = [-1*%pi:%pi/360:1*%pi];
+	
+	y = log(x + sqrt(x+1).*sqrt(x-1));
+
+	return [x, y];		
+	
+endfunction
+
+function [y]=arcosh_specific(a)
+
+	//x = [-1*%pi:%pi/360:1*%pi];
+	
+	y = log(a + sqrt(a+1)*sqrt(a-1));
+
+	return [y];		
+	
+endfunction
+
+function [x,y]=tanh_series()
+
+	x = [-1*%pi:%pi/360:1*%pi];
+	
+	y = (%e^(2*x)-1)./(%e^(2*x)+1);
+
+	return [x, y];
+	
+endfunction
+
+function [y]=tanh_specific(x)
+
+	//x = [-1*%pi:%pi/360:1*%pi];
+	
+	y = (%e^(2*x)-1)/(%e^(2*x)+1);
+
+	return [y];
+	
+endfunction//tanh_specific(x)
+
+function [y]=tanh_get_max()
+
+	//x = [-1*%pi:%pi/360:1*%pi];
+	
+	for i=0:%pi/360:%pi*10
+		
+		y = (%e^(2*i)-1)/(%e^(2*i)+1);
+		
+		if y > 0.9999999 then	// 7th decimal point
+		//if y > 0.999999 then
+		//if y > 1.0 then
+		//REF http://www.matrixlab-examples.com/if-statement-scilab.html
+		//if y > 0.99 & y < 1.0 then
+		//if (y > 0.99) && (y < 1.0) then
+		//if (y > 0.99) and (y < 1.0) then
+		//if y>1 then
+			
+			//disp(y);
+			printf("i=%f / y=%f\n",i,y);
+			
+			//return y;
+			
+			break;
+		
+		end//if y>1 then
+		
+	end//for i=0:%pi
+	
+	//y = (%e^(2*x)-1)/(%e^(2*x)+1);
+
+	return -1;
+	
+endfunction
+
+//function [x,v]=free_fall_velocity()
+//function []=free_fall_velocity()
+function [t,v]=free_fall_velocity()
+
+	// vars
+	t = 0:0.1:61;
+	
+	v = [];
+	
+	m = 65;
+	g = 9.81;
+	k = 0.24;
+	
+	len = size(t,"c");
+	//len = size(t);
+	
+	// calc
+	for i=0:len-1
+	//for i=0:size(t)
+	//for i=0:0.1:61
+	
+		v(i+1) = tanh_specific(t(i+1));
+		//v(i+1) = tanh_specific(i);
+		//v = tanh_specific(i);
+		
+		//printf("i=%d / v = %f\n",i,v);
+	
+	end
+	
+	// return
+	return [t,v];
+	
+	//v = tanh_specific(x);
+	
+	//return [x,v]
+
 	//return [x, y, xc, yc];		
 	
 endfunction
