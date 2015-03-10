@@ -346,23 +346,34 @@ function []=anim()
 	clear; xdel(winsid());
 
 	// Create data
-	t = 0:0.005:1;    // Time data
+	t = 0:0.005:2;    // Time data
+	//t = 0:0.005:1;    // Time data
 	x = sin(2*%pi*t); // Position data
 	
 	// Draw initial figure
 	figure(1);
-	plot(x(1),0,'o');
+	//plot(x(1),0,'o');
+	//plot(x(1),10,'o');
+	
+	//REF LineSpec http://help.scilab.org/docs/5.3.0/en_US/LineSpec.html
+	plot(x(1),10,'sr');
+	
+	
 	h_compound = gce();
-	h_compound.children.mark_size = 20;
-	h_compound.children.mark_background = 2;
+	//h_compound.children.mark_size = 20;
+	h_compound.children.mark_size = 10;		//=> size of the object moved
+	//h_compound.children.mark_background = 2;
+	h_compound.children.mark_background = 3;	//=> bg of the object
 	h_axes = gca();
-	h_axes.data_bounds = [-1.5,-1.5;1.5,1.5];
+	//h_axes.data_bounds = [-1.5,-1.5;1.5,1.5];
+	h_axes.data_bounds = [-3,-3; 3,3];
 	
 	// Animation Loop
 	i = 1;
 	while i<=length(x)
 	    drawlater();
-	    h_compound.children.data = [x(i),0];
+	    h_compound.children.data = [x(i),x(i)];
+	    //h_compound.children.data = [x(i),0];
 	    drawnow();
 	    i = i+1;
 	end		
