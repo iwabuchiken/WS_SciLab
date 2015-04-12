@@ -674,6 +674,112 @@ function [j, res, j, res_2, j,res_3]=logW_Sum()
 	
 endfunction
 
+//function [j,result_2]=Ej()
+//function [j,result]=Ej()
+function [j,result,j,result_2]=Ej()
+
+	j = 1:1:10;
+	
+	tenth = -2;
+	
+	kB = 1.38 * 10 ^ tenth;
+	
+	T = 300;
+	
+	pow = -1 * j / (kB * T);
+	
+	result = %e.^pow;
+	result_2 = (%e.^pow) .* j;
+	
+	//return [j,result];		
+	return [j,result,j,result_2];		
+	//return [j,result_2];		
+	
+endfunction
+
+// Ej*e^(-1/kB*T) / e^(-1/kB*T)
+function [j,res,j,res_2,j,res_3]=Ej_2()
+//function [j,res,j,res_2]=Ej_2()
+
+	//j = 1:1:10;
+	
+	tenth = -2;
+	
+	kB = 1.38 * 10 ^ tenth;
+	
+	T = 300;
+	
+	//pow = -1 * j / (kB * T);
+	
+	for j = 1:10
+		
+		E = floor(rand(getdate("s")) * 10)
+	
+		pow = -1 * E / (kB * T);
+		
+		res(j)		= %e.^pow;			// e^(-1/kB*T)
+		res_2(j)	= (%e.^pow) .* E;	// Ej*e^(-1/kB*T)
+		res_3(j)	= res_2(j) / res(j);
+	
+	end//for j = 1:10
+	
+	j = 1:1:10;
+	
+	//return [j,res,j,res_2];		
+	return [j,res,j,res_2,j,res_3];		
+	
+endfunction
+
+// sum(Ej*e^(-1/kB*T)) / sum(e^(-1/kB*T))
+function [j,res,j,res_2,j,res_3,j,res_sum]=Ej_2()
+//function [j,res,j,res_2,j,res_3]=Ej_2()
+
+	//j = 1:1:10;
+	
+	tenth = -2;
+	
+	kB = 1.38 * 10 ^ tenth;
+	
+	T = 300;
+	
+	//pow = -1 * j / (kB * T);
+	
+	s1 = 0;
+	s2 = 0;
+	s3 = 0;
+	
+	s_sum = 0;
+	
+	for j = 1:50
+	//for j = 1:10
+		
+		//E = j;
+		E = floor(rand(getdate("s")) * 10)
+	
+		pow = -1 * E / (kB * T);
+		
+		res(j)		= %e.^pow;			// e^(-1/kB*T)
+		res_2(j)	= (%e.^pow) .* E;	// Ej*e^(-1/kB*T)
+		res_3(j)	= res_2(j) / res(j);
+		
+		s2 = s2 + res_2(j);		// nominator
+		s1 = s1 + res(j);		// denominator
+	
+		s_sum = s_sum + s2 / s1;
+	
+		res_sum(j) = s_sum;
+		//res_sum(j) = s2 / s1;
+	
+	end//for j = 1:10
+	
+	j = 1:1:50;
+	//j = 1:1:10;
+	
+	//return [j,res,j,res_2,j,res_3];		
+	return [j,res,j,res_2,j,res_3,j,res_sum];		
+	
+endfunction
+
 function []=func()
 
 	//return [x, y, xc, yc];		
