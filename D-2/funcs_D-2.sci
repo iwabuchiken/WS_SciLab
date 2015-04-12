@@ -588,6 +588,92 @@ function [t,v]=free_fall_velocity()
 	
 endfunction
 
+function [x, y]=exponetial()
+
+	x = -3:0.1:3;
+	
+	y = exp(x);
+
+	return [x, y];		
+	
+endfunction
+
+function [j, res, j, res_2, j,res_3]=logW_Sum()
+//function [j, res]=logW_Sum()
+
+	sum_sigma = 0;
+	
+	// setup: random
+//	floor(rand(getdate("s")) * 10)
+	
+	//j=1:10;
+	
+	for j=1:10
+	//for j=1:10
+	
+		//printf("j=%d\n",j);
+		
+		sum_sigma = 0;
+	
+		sum_sigma_incre = 0;
+		
+		sum_sigma_random = 0;
+	
+		for i=1:j
+		
+//			printf("i=%d\n",i);
+		
+			//sum_sigma += 1;	//=> n/w
+			
+			//sum_sigma = sum_sigma +1;
+		
+			sum_sigma = sum_sigma + (2 * log(2));
+			//sum_sigma = sum_sigma + (i * log(i));
+			sum_sigma_incre = sum_sigma_incre + (i * log(i));
+			
+			//REF http://help.scilab.org/docs/5.3.1/en_US/getdate.html
+			r = floor(rand(getdate("s")) * 10);
+			
+			//debug
+			//printf("j=%d / r=%d\n",j,r);
+			
+			// validate
+			if r == 0 then r = 1; end
+			
+			sum_sigma_random = sum_sigma_random + (r * log(r));
+	
+		end
+		
+		printf("j=%d / sum_sigma=%f\n",j,sum_sigma);
+		
+		// add element
+		res(j) = sum_sigma;
+		res_2(j) = sum_sigma_incre;
+		res_3(j) = sum_sigma_random;
+		
+//		printf("j=%d\n",j);
+		
+	end//for j=1:10
+	
+	//printf("sum_sigma=%d\n",sum_sigma);
+
+
+	////////////////////////////////////
+	//REF http://mailinglists.scilab.org/How-do-I-write-a-summation-notation-in-scilab-td4024860.html	Sep 21, 2012; 3:06pm
+	//s=[]; for n=-10:10, s=s+cos(n); end;
+	s=[]; for n=-10:10, s=s+cos(x+0.09*n*x); end
+
+	j=1:10;
+	
+	return [j, res, j, res_2, j,res_3];
+	//return [j, res, j, res_2];
+	//return [j, res];
+	//return [s, res];
+	
+	//return [x, y, xc, yc];		
+	
+endfunction
+
 function []=func()
 
 	//return [x, y, xc, yc];		
