@@ -929,6 +929,233 @@ function []=hubeny()
 	
 endfunction
 
+function [a, res, c] = matrix_alternative(val)
+//function [a, res, c] = matrix_alternative()
+
+	if val == null then
+		
+		printf("val => null\n");
+		
+		val = 5;
+		
+		printf("val => set to default of 5\n");
+	
+	end
+
+	a = [0,1,1;
+		1,0,1;
+		1,1,0];
+		
+	// how to access elements in a matrix
+	// a(x,y)	=> xth row, yth column
+	// a(x:y)	=> xth element to yth element
+	// a(z,x:y)	=> zth row, from xth col to yth col
+	
+	printf("a: a11=%d\n", a(1,1));
+	
+	res = [];
+	
+	for i=2:10
+	
+		tmp = a^i;
+		
+		//printf("a%d: a11=%d\n", i, tmp(1,1));
+	
+		res(1,i-1) = tmp(1,1);
+	
+	end//for i=2:5
+		
+	//printf("%s", a);
+
+	/////////////////
+	// ones
+	/////////////////
+	d = val;
+	//d = 5;
+	
+	c = ones(d,d);
+	//c = ones(3,3);
+	
+	for i=1:d
+	
+		for j=1:d
+	
+	//		printf("c(%d,%d)=%d\n", i, j, c(i,j));
+	
+			//REF modulo http://d.hatena.ne.jp/potato-attack/20100707/1278490234
+			//printf("i=%d, j=%d: j, 3=%d\n", i, j, modulo(j, 3));
+			//printf("i=%d, j=%d: j,3=%d\n", i, j, (j % 3));
+			
+				
+			if modulo(j, d+1) == i then
+			//if modulo(j, 4) == i then
+			//if modulo(j,3) == i then
+			//if (j%3) == i then
+				
+				c(i,j) = 0;
+			
+			end
+		
+		end
+	end
+
+	return [a, res, c];		
+
+//	c = ones(3,3);
+//	t = 1;
+//	 
+//	for i=1:3 for j=1:3 c(i,j:j)=c(i,j:j)*t; t = t + 1; end end
+// c  =
+// 
+//    1.    2.    3.  
+//    4.    5.    6.  
+//    7.    8.    9. 
+	
+endfunction//matrix_alternative()
+
+function [a, res, c] = get_alt_matrix(val)
+//function [a, res, c] = matrix_alternative()
+
+	if val == null then
+		
+		printf("val => null\n");
+		
+		val = 5;
+		
+		printf("val => set to default of 5\n");
+	
+	end
+
+	a = [0,1,1;
+		1,0,1;
+		1,1,0];
+		
+	// how to access elements in a matrix
+	// a(x,y)	=> xth row, yth column
+	// a(x:y)	=> xth element to yth element
+	// a(z,x:y)	=> zth row, from xth col to yth col
+	
+	printf("a: a11=%d\n", a(1,1));
+	
+	res = [];
+	
+	for i=2:10
+	
+		tmp = a^i;
+		
+		//printf("a%d: a11=%d\n", i, tmp(1,1));
+	
+		res(1,i-1) = tmp(1,1);
+	
+	end//for i=2:5
+		
+	//printf("%s", a);
+
+	/////////////////
+	// ones
+	/////////////////
+	d = val;
+	//d = 5;
+	
+	c = ones(d,d);
+	//c = ones(3,3);
+	
+	for i=1:d
+	
+		for j=1:d
+	
+	//		printf("c(%d,%d)=%d\n", i, j, c(i,j));
+	
+			//REF modulo http://d.hatena.ne.jp/potato-attack/20100707/1278490234
+			//printf("i=%d, j=%d: j, 3=%d\n", i, j, modulo(j, 3));
+			//printf("i=%d, j=%d: j,3=%d\n", i, j, (j % 3));
+			
+				
+			if modulo(j, d+1) == i then
+			//if modulo(j, 4) == i then
+			//if modulo(j,3) == i then
+			//if (j%3) == i then
+				
+				c(i,j) = 0;
+			
+			end
+		
+		end
+	end
+
+	return [a, res, c];		
+
+//	c = ones(3,3);
+//	t = 1;
+//	 
+//	for i=1:3 for j=1:3 c(i,j:j)=c(i,j:j)*t; t = t + 1; end end
+// c  =
+// 
+//    1.    2.    3.  
+//    4.    5.    6.  
+//    7.    8.    9. 
+	
+endfunction//get_alt_matrix()
+
+function [c]=alternative_values(len, val)
+
+	d = len;
+	//d = 5;
+	
+	c = ones(d,d)*val;
+	//c = ones(3,3);
+	
+	for i=1:d
+	
+		for j=1:d
+	
+	//		printf("c(%d,%d)=%d\n", i, j, c(i,j));
+	
+			//REF modulo http://d.hatena.ne.jp/potato-attack/20100707/1278490234
+			//printf("i=%d, j=%d: j, 3=%d\n", i, j, modulo(j, 3));
+			//printf("i=%d, j=%d: j,3=%d\n", i, j, (j % 3));
+			
+				
+			if modulo(j, d+1) == i then
+			//if modulo(j, 4) == i then
+			//if modulo(j,3) == i then
+			//if (j%3) == i then
+				
+				c(i,j) = 0;
+			
+			end
+		
+		end
+		
+	end//for i=1:d
+	
+	return [c];		
+	
+endfunction//alternative_values(size, val)
+
+function [i, dets]=det_alternatives(val)
+
+	// validate
+	if val == null then
+	
+		val = 1;
+	
+	end
+
+	dets = [];
+	
+	for i=1:5
+	
+		dets(1,i) = det(alternative_values(i+2,1));
+	
+	end
+
+	i = 1:5;
+
+	return [i, dets];		
+	
+endfunction//det_alternatives()
+
 function []=func()
 
 	//return [x, y, xc, yc];		
