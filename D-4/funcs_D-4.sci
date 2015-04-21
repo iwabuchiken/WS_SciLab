@@ -1162,3 +1162,35 @@ function []=func()
 	
 endfunction
 
+// @return
+//		a matrix of len x len, with the value of each element being val 
+function [res]=get_square_m(len, val)
+
+	res = [];
+
+	for i = 1:len
+	
+		for j = 1:len
+		
+			if j > 3 then
+			//if j <= 4 then
+			//if i <= 4 then
+			//if i <= 4 & j <= 4 then
+			//if i == 1 & j == 1 then
+				
+				res(i,j) = val * 2;
+			
+			else
+			
+				//res(i,j) = val*rand();
+				res(i,j) = val;
+				
+			end
+		end
+		
+	end
+	
+	return [res];		
+	
+endfunction
+
