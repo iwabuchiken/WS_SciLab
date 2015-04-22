@@ -1156,12 +1156,6 @@ function [i, dets]=det_alternatives(val)
 	
 endfunction//det_alternatives()
 
-function []=func()
-
-	//return [x, y, xc, yc];		
-	
-endfunction
-
 // @return
 //		a matrix of len x len, with the value of each element being val 
 function [res]=get_square_m(len, val)
@@ -1175,6 +1169,8 @@ function [res]=get_square_m(len, val)
 			if j > 3 then
 			//if j <= 4 then
 			//if i <= 4 then
+			
+			//REF multiple conditions http://www.matrixlab-examples.com/if-statement-scilab.html
 			//if i <= 4 & j <= 4 then
 			//if i == 1 & j == 1 then
 				
@@ -1191,6 +1187,123 @@ function [res]=get_square_m(len, val)
 	end
 	
 	return [res];		
+	
+endfunction
+
+function [res]=get_matrix(x,y,val)
+
+	res = [];
+
+	for i = 1:x
+	
+		for j = 1:y
+		
+			res(i,j) = val;
+			
+		end
+		
+	end
+	
+	return [res];		
+
+endfunction
+
+// transpose matrix whose elements being composed of
+//		complex numbers
+// @param
+//		mat	=> matrix of complex numbers
+function [res]=trans_complex(mat)
+
+	[x y] = size(mat);
+	
+	res = [];
+	
+	printf("x=%d, y=%d\n", x, y);
+
+	for i = 1:x
+	
+		for j = 1:y
+		
+			res(j,i) = mat(i,j);
+		
+		end
+		
+	end
+
+	return [res];		
+	
+endfunction
+
+function [res]=matrix_all_true(mat)
+
+	[x y] = size(mat);
+	
+	printf("x=%d, y=%d\n", x, y);
+
+	for i = 1:x
+	
+		for j = 1:y
+		
+			// non-boolean
+			//REF negation http://www.matrixlab-examples.com/if-statement-scilab.html "The ~ (not) operator lets you"
+			if ~(mat(j,i) ==  %t) & ~(mat(j,i) ==  %f) then
+		
+				res = null;
+				
+				printf("non-boolean value => mat(%d,%d) = %d\n", j, i, mat(j,i));
+				
+				return [res];
+		
+			end
+		
+			// if false
+			if mat(j,i) ==  %f then
+			
+				res = %f;
+		
+				return [res];
+			
+			end
+			
+		end
+		
+	end
+
+	res = %t;
+		
+	return [res];
+	
+	//return [%t];		
+	
+endfunction//matrix_all_true(mat)
+
+function [mat]=get_diagonal_matrix(len, val)
+
+	mat = [];
+	
+	for i = 1:len
+		for j = 1:len
+
+			if (i == j) then
+			
+				mat(i,j) = val;
+			
+			else
+			
+				mat(i,j) = 0;
+			
+			end
+		
+		end
+	end
+
+	return [mat];		
+	
+endfunction//get_diagonal_matrix()
+
+function []=func()
+
+	//return [x, y, xc, yc];		
 	
 endfunction
 
