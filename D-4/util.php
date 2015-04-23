@@ -21,8 +21,6 @@ function create_FuncList() {
 		
 	}
 	
-	
-	
 	$line = fgets($fin, 1000);
 	
 	printf("[%s : %d] line = %s", 
