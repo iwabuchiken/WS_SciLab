@@ -1301,6 +1301,93 @@ function [mat]=get_diagonal_matrix(len, val)
 	
 endfunction//get_diagonal_matrix()
 
+function [res]=det_3(mat)
+
+	d1 = mat(1,1)*mat(2,2)*mat(3,3);
+	d2 = mat(1,2)*mat(2,3)*mat(3,1);
+	d3 = mat(1,3)*mat(2,1)*mat(3,2);
+
+	d4 = mat(1,3)*mat(2,2)*mat(3,1);
+	d5 = mat(1,1)*mat(2,3)*mat(3,2);
+	d6 = mat(1,2)*mat(2,1)*mat(3,3);
+
+	printf("d1=%d d2=%d d3=%d\n", d1, d2, d3);
+	printf("d4=%d d5=%d d6=%d\n", d4, d5, d6);
+
+	printf("pluses = %d, minuses = %d\n", (d1+d2+d3), (d4+d5+d6));
+
+	res = d1+d2+d3 -d4-d5-d6;
+
+	return [res];		
+	
+endfunction//det_3(mat)
+
+function [res]=det_2(mat)
+
+	[m n] = size(mat);
+	
+	res = mat(1,1) * mat(2,2) - mat(1,2)*mat(2,1);
+
+	return [res];		
+	
+endfunction//det_2(mat)
+
+function [a]=minor(mat, j, k)
+
+	[m n] = size(mat);
+	
+	a = [];
+	
+	x = 0; y = 0;
+	
+	for i = 1:m
+		
+//		printf("i=%d\n", i);
+		
+		if (i == j) then
+		
+			continue;
+			
+		end
+		
+		x = x + 1;
+		
+//		printf("x=%d\n", x);
+		
+		for p = 1:n
+		
+//			printf("p=%d\n", p);
+		
+			if (p == k) then
+			
+				continue;
+				
+			end
+			
+			y = y + 1;
+		
+//			printf("y=%d\n", y);
+		
+			//if ~(i == j) & ~(j == k) then
+			//if ~(i == j) & ~(j == k) then
+			
+				a(x,y) = mat(i,p);
+				//a(x,j) = mat(i,j);
+				//a(i,j) = mat(i,j);
+			
+			//end
+		
+		end//for p = 1:n
+		
+		// reset y
+		y = 0;
+		
+	end//for i = 1:m
+
+	return [a];		
+	
+endfunction
+
 function []=func()
 
 	//return [x, y, xc, yc];		
