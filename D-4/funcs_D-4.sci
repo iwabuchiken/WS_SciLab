@@ -1342,7 +1342,7 @@ function [a]=minor(mat, j, k)
 	
 	for i = 1:m
 		
-//		printf("i=%d\n", i);
+		printf("i=%d\n", i);
 		
 		if (i == j) then
 		
@@ -1352,11 +1352,11 @@ function [a]=minor(mat, j, k)
 		
 		x = x + 1;
 		
-//		printf("x=%d\n", x);
+		printf("x=%d\n", x);
 		
 		for p = 1:n
 		
-//			printf("p=%d\n", p);
+			printf("p=%d\n", p);
 		
 			if (p == k) then
 			
@@ -1366,7 +1366,7 @@ function [a]=minor(mat, j, k)
 			
 			y = y + 1;
 		
-//			printf("y=%d\n", y);
+			printf("y=%d\n", y);
 		
 			//if ~(i == j) & ~(j == k) then
 			//if ~(i == j) & ~(j == k) then
