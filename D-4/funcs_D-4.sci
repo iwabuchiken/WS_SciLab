@@ -1388,6 +1388,217 @@ function [a]=minor(mat, j, k)
 	
 endfunction
 
+
+////////////////////////////////////
+//	A: size => w=3,h=3
+//	B: size => w=1,h=3
+////////////////////////////////////
+//function [sol, ds, ds_2]=cramer(A, B)
+function [sol, ds]=cramer(A, B)
+//function [x, y, z, A_x, A_y, A_z]=cramer(A, B)
+
+	d = det(A);
+	
+	//validate
+	if (d == null) then
+	
+		printf("det => null\n");
+		
+		return [null];
+	
+	elseif (d == 0) then
+	
+		printf("det => 0\n");
+		
+		return [null];
+	
+	else
+	
+		printf("det => %d\n", d);
+	
+	end
+	
+	// validate: B => 1xN matrix (=> Nx1 in SciLab)
+	[Bx By] = size(B);
+	
+	if ~(By == 1) then
+	
+		printf("number of the columns of B => not 1");
+		
+		return [null];
+	
+	end
+	
+	// valid: B: 1xN: N => same as |A.row|
+	[Ax Ay] = size(A);
+	
+	if ~(Ax == Bx) then
+	
+		printf("Ax and Bx => not same");
+		
+		return [null];
+		
+	end
+	
+	
+	//printf("B.x = %d / B.y = %d", x, y);
+	
+	////////////////////////////////////
+	// setup
+	////////////////////////////////////
+	sol = [];
+	ds = [];
+	
+	ds_2 = [];
+	
+	//sol_2 = [];
+	
+	//tmp = zeros(Ax,Ay);
+	
+	
+	
+	////////////////////////////////////
+	// get: x
+	////////////////////////////////////
+	A_x = A;
+	
+	for i=1:Ax
+	
+		//printf("A(%d,1) => %d\n", i, A(i,1));
+		
+		//A(i,1) = B(i,1);
+		A_x(i,1) = B(i,1);
+	
+	end
+	
+	x = 1 ./d * det(A_x);
+
+	sol_2(1)	= x;
+	//ds(1)		= A_x;
+	//ds_2(1)		= A_x;
+	
+	//ds_2		= [A_x];
+	
+	for i=1:Ax
+	
+		for j=1:Ay
+		
+			ds_2(i,j) = A_x(i,j);
+		
+		end
+		
+	end
+	
+	
+	//printf("x => %d\n", x);
+
+	////////////////////////////////////
+	// get: y
+	////////////////////////////////////
+	A_y = A;
+	
+	col = 2;
+	
+	for i=1:Ax
+	
+		//printf("A(%d,%d) => %d\n", i, col, A(i,col));
+		
+		//A(i,1) = B(i,1);
+		A_y(i,col) = B(i,1);
+	
+	end
+	
+	y = 1 ./d * det(A_y);
+
+	sol_2(2)	= y;
+//	sol(2)	= y;
+//	ds(2)		= A_y;
+//	ds_2(2)		= A_y;
+//	ds_2(1,2)		= A_y;
+
+	// Add A_y to ds_2
+	
+	[ds_X ds_Y] = size(ds_2);
+
+	for i=1:Ax
+	
+		for j=1:Ay
+		
+			ds_2(i,j + ds_Y) = A_y(i,j);
+			//ds_2(i,j + ds_X) = A_y(i,j);
+			//ds_2(i + ds_X,j) = A_y(i,j);
+		
+		end
+		
+	end
+
+
+	//printf("y => %d\n", y);
+
+	////////////////////////////////////
+	// get: z
+	////////////////////////////////////
+	A_z = A;
+	
+	col = 3;
+	
+	for i=1:Ax
+	
+		//printf("A(%d,%d) => %d\n", i, col, A(i,col));
+		
+		//A(i,1) = B(i,1);
+		A_z(i,col) = B(i,1);
+	
+	end
+	
+	z = 1 ./d * det(A_z);
+
+//	sol(3)	= z;
+//	ds(3)		= A_z;
+	
+	// Add A_z to ds_2
+	
+	[ds_X ds_Y] = size(ds_2);
+
+	printf("ds_X=%d ds_Y=%d\n", ds_X, ds_Y);
+
+	for i=1:Ax
+	
+		for j=1:Ay
+		
+			ds_2(i,j + ds_Y) = A_z(i,j);
+			//ds_2(i,j + ds_X) = A_z(i,j);
+		
+		end
+		
+	end
+
+	//printf("z => %d\n", z);
+
+	////////////////////////////////////
+	// build: return
+	////////////////////////////////////
+	sol = [x y z];
+	
+	//ds = [A_x A_y A_z];
+	//ds = [A_x A_y A_z tmp];
+	ds = ds_2;
+	//ds = [A_x, A_y, A_z, tmp];
+
+
+
+	
+	////////////////////////////////////
+	// return
+	////////////////////////////////////
+	//return [sol, ds, ds_2];		
+	return [sol, ds];		
+	
+	//return [x y z A_x A_y A_z];		
+	//return [A];		
+	
+endfunction
+
 function []=func()
 
 	//return [x, y, xc, yc];		
